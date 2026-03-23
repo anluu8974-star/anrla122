@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Memory Modifier - LongV</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            text-align: center;
+            padding-top: 20px;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 8s ease infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            border: 2px solid #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+        }
+        button:hover { transform: scale(1.05); }
+        #danthangBtn { background-color: #1d3c6e; border-color:#4aa0ff; }
+        #buffmanBtn { background-color: #e56b00; border-color:#ff9f3f; }
+        #nheTamBtn { background-color: #4b0082; border-color:#9370db; }
+        #runAllBtn { background-color: #6e9b1d; border-color:#a8ff4f; }
+        button:active { box-shadow: 0 0 8px rgba(0,0,0,0.4); transform: scale(0.95); }
+
+        .status {
+            font-size: 14px;
+            margin-top: 5px;
+            font-weight: bold;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 8s ease infinite;
+        }
+
+        #marqueeContainer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            overflow: hidden;
+            height: 24px;
+            background-color: #121212;
+        }
+        #marqueeText {
+            display: inline-block;
+            white-space: nowrap;
+            font-weight: bold;
+            font-size: 16px;
+            padding-left: 100%;
+            animation: marquee 12s linear infinite;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+    <script src="h5gg.js"></script>
+</head>
+<body>
+    <h1>Game Memory Modifier - Menu by LongV (Nhẹ Tâm Bám Đầu 2026)</h1>
+
+    <div>
+        <button id="danthangBtn" onclick="danthang()">Danthang</button>
+        <div id="statusDanthang" class="status" style="display:none;">Đã bật</div>
+    </div>
+
+    <div>
+        <button id="buffmanBtn" onclick="buffman1()">Buffman</button>
+        <div id="statusBuffman" class="status" style="display:none;">Đã bật</div>
+    </div>
+
+    <div>
+        <button id="nheTamBtn" onclick="nheTamBamDau()">Nhẹ Tâm Bám Đầu</button>
+        <div id="statusNheTam" class="status" style="display:none;">Đã bật - Bám Đầu Mượt</div>
+    </div>
+
+    <div>
+        <button id="runAllBtn" onclick="runAllInOne()">All-in-one (Full Hack)</button>
+        <div id="statusAll" class="status" style="display:none;">Đã bật Full</div>
+    </div>
+
+    <div id="marqueeContainer">
+        <div id="marqueeText">Hack by LongV | TikTok: @bolongnguyn598 | Nhẹ Tâm Bám Đầu Offset: 1016018816 → 16018816 | Fix rung - Bám đầu mượt - No dame error - 100% Head</div>
+    </div>
+
+    <script type="text/javascript">
+        // Hàm search & replace chung (tối ưu, tránh lặp)
+        function searchAndReplace(searchVal, replaceVal, type = 'I32') {
+            h5gg.clearResults();
+            h5gg.searchNumber(searchVal, type, '0x100000000', '0x160000000');
+            let count = h5gg.getResultsCount();
+            if (count > 0) {
+                let results = h5gg.getResults(count);
+                for (let i = 0; i < count; i++) {
+                    h5gg.setValue(results[i].address, replaceVal, type);
+                }
+            }
+        }
+
+        // Danthang (giữ nguyên)
+        function danthang() {
+            searchAndReplace('1016018816', '200', 'I32');
+            document.getElementById("statusDanthang").style.display = "block";
+        }
+
+        // Buffman (giữ nguyên, code sạch hơn)
+        function buffman1() {
+            h5gg.clearResults();
+            let hk1 = 2000;
+            h5gg.searchNumber('4417130516484980736', 'I64', '0x100000000', '0x160000000');
+            let count = h5gg.getResultsCount();
+            if (count > 0) {
+                let r = h5gg.getResults(count);
+                for (let i = 0; i < count; i++) {
+                    let addr = Number(r[i].address);
+                    h5gg.setValue(addr - 4, hk1, "F32");
+                    h5gg.setValue(addr - 8, hk1, "F32");
+                    h5gg.setValue(addr - 12, hk1, "F32");
+                    h5gg.setValue(addr, hk1, "F32");
+                }
+            }
+            document.getElementById("statusBuffman").style.display = "block";
+        }
+
+        // Nhẹ Tâm Bám Đầu (smooth head lock, fix rung, bám đầu tự nhiên)
+        function nheTamBamDau() {
+            searchAndReplace('1016018816', '16018816', 'I32');
+            document.getElementById("statusNheTam").style.display = "block";
+        }
+
+        // All-in-one: bật hết + auto refresh 10s để giữ nhẹ tâm ổn định
+        let autoInterval;
+        function runAllInOne() {
+            danthang();
+            buffman1();
+            nheTamBamDau();
+            document.getElementById("statusAll").style.display = "block";
+
+            if (autoInterval) clearInterval(autoInterval);
+            autoInterval = setInterval(() => {
+                danthang();
+                buffman1();
+                nheTamBamDau();  // Re-apply để chống reset, giữ bám đầu mượt
+            }, 10000);
+        }
+
+        window.addEventListener("beforeunload", () => {
+            if (autoInterval) clearInterval(autoInterval);
+        });
+    </script>
+</body>
+</html>
