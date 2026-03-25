@@ -3,176 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Memory Modifier - LongV</title>
+    <title>CheatiOSVip Menu Full</title>
     <style>
+        :root {
+            --bg-main: rgba(18, 18, 18, 0.95);
+            --bg-sidebar: rgba(28, 28, 30, 0.8);
+            --accent: #4ade80; /* Màu xanh lá đặc trưng */
+            --text: #ffffff;
+            --text-dim: #9ca3af;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #121212;
-            color: #fff;
-            text-align: center;
-            padding-top: 20px;
-        }
-        h1 {
-            font-size: 28px;
-            font-weight: bold;
-            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: rainbow 8s ease infinite;
-            margin-bottom: 20px;
-        }
-        @keyframes rainbow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        button {
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            border: 2px solid #fff;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: white;
-        }
-        button:hover { transform: scale(1.05); }
-        #danthangBtn { background-color: #1d3c6e; border-color:#4aa0ff; }
-        #buffmanBtn { background-color: #e56b00; border-color:#ff9f3f; }
-        #nheTamBtn { background-color: #4b0082; border-color:#9370db; }
-        #runAllBtn { background-color: #6e9b1d; border-color:#a8ff4f; }
-        button:active { box-shadow: 0 0 8px rgba(0,0,0,0.4); transform: scale(0.95); }
-
-        .status {
-            font-size: 14px;
-            margin-top: 5px;
-            font-weight: bold;
-            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: rainbow 8s ease infinite;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: -apple-system, system-ui, sans-serif;
+            -webkit-user-select: none;
         }
 
-        #marqueeContainer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+        .mod-menu {
+            width: 260px; /* Chiều rộng nhỏ hơn */
+            background: var(--bg-main);
+            backdrop-filter: blur(12px);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            color: var(--text);
             overflow: hidden;
-            height: 24px;
-            background-color: #121212;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         }
-        #marqueeText {
-            display: inline-block;
-            white-space: nowrap;
+
+        .header {
+            padding: 12px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border);
+            background: rgba(255,255,255,0.03);
+        }
+
+        .main-container { display: flex; height: 260px; }
+
+        /* Sidebar Tabs */
+        .sidebar {
+            width: 85px;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+        }
+
+        .tab-item {
+            padding: 16px 5px;
+            font-size: 11px;
+            text-align: center;
+            color: var(--text-dim);
+            cursor: pointer;
+            border-bottom: 0.5px solid var(--border);
+            transition: 0.2s;
+        }
+
+        .tab-item.active {
+            background: #2a2a2c;
+            color: var(--accent);
             font-weight: bold;
-            font-size: 16px;
-            padding-left: 100%;
-            animation: marquee 12s linear infinite;
-            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+
+        /* Content Area */
+        .content { flex: 1; padding: 12px; overflow-y: auto; }
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 12px;
+            font-weight: 500;
         }
+
+        /* --- NÚT GẠT TO (GIỐNG VIDEO) --- */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 46px; /* Kích thước to */
+            height: 24px;
+        }
+
+        .switch input { display: none; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #3f3f46;
+            transition: .3s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        input:checked + .slider { background-color: var(--accent); }
+        input:checked + .slider:before { transform: translateX(22px); }
+
+        /* Speed Slider (Trong phần Tối Ưu Máy) */
+        .range-box { margin-bottom: 15px; }
+        .range-label { font-size: 10px; color: var(--accent); margin-bottom: 4px; display: block; }
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--accent);
+            height: 4px;
+            margin: 8px 0;
+        }
+
+        .close-btn {
+            width: 100%;
+            padding: 12px;
+            background: none;
+            border: none;
+            border-top: 1px solid var(--border);
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Custom Scrollbar */
+        .content::-webkit-scrollbar { width: 2px; }
+        .content::-webkit-scrollbar-thumb { background: var(--border); }
     </style>
-    <script src="h5gg.js"></script>
 </head>
 <body>
-    <h1>Game Memory Modifier - Menu by LongV (Nhẹ Tâm Bám Đầu 2026)</h1>
 
-    <div>
-        <button id="danthangBtn" onclick="danthang()">Danthang</button>
-        <div id="statusDanthang" class="status" style="display:none;">Đã bật</div>
+<div class="mod-menu">
+    <div class="header">CheatiOSVip / FreeFire</div>
+    
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="tab-item active" onclick="switchTab(event, 'Chức Năng 1')">Chức Năng 1</div>
+            <div class="tab-item" onclick="switchTab(event, 'Chức Năng 2')">Chức Năng 2</div>
+            <div class="tab-item" onclick="switchTab(event, 'Chức Năng 3')">Chức Năng 3</div>
+            <div class="tab-item" onclick="switchTab(event, 'Tối Ưu Máy')">Tối Ưu Máy</div>
+        </div>
+
+        <div class="content">
+            <div id="Chức Năng 1" class="tab-pane active">
+                <div class="item"><span>AIMLOCK</span> <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="item"><span>NHẸ TÂM</span> <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="item"><span>Ổn Định Tâm </span> <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="item"><span>Giảm lố</span> <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="item"><span>Giảm Lệch Đạn</span> <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+            </div>
+
+            <div id="Chức Năng 2" class="tab-pane">
+                <div class="item"><span>Fix Rung</span> <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="item"><span>Bám đầu</span> <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="item"><span>Đầm Tâm</span> <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="item"><span>Nhạy Tâm</span> <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+            </div>
+
+            <div id="Chức Năng 3" class="tab-pane">
+                <div class="item"><span>HoldLock</span> <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="item"><span>Nhạy Device</span> <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="item"><span>Sensi</span> <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="item"><span>SensiGun</span> <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+            </div>
+
+            <div id="Tối Ưu Máy" class="tab-pane">
+                <div class="item"><span>Buff Fps </span> <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="item"><span>Tối Ưu Game </span> <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="range-box">
+                    <span class="range-label">Tối Ưu Thiết Bị: <span id="speed-val">1.0</span>x</span>
+                    <input type="range" min="1" max="2" step="0.1" value="1" oninput="document.getElementById('speed-val').innerText = this.value">
+                </div>
+            </div>
+        </div>
     </div>
+    
+    <button class="close-btn"> MinaRiin🐸 </button>
+</div>
 
-    <div>
-        <button id="buffmanBtn" onclick="buffman1()">Buffman</button>
-        <div id="statusBuffman" class="status" style="display:none;">Đã bật</div>
-    </div>
+<script>
+    function switchTab(e, tabId) {
+        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        e.currentTarget.classList.add('active');
+    }
+</script>
 
-    <div>
-        <button id="nheTamBtn" onclick="nheTamBamDau()">Nhẹ Tâm Bám Đầu</button>
-        <div id="statusNheTam" class="status" style="display:none;">Đã bật - Bám Đầu Mượt</div>
-    </div>
-
-    <div>
-        <button id="runAllBtn" onclick="runAllInOne()">All-in-one (Full Hack)</button>
-        <div id="statusAll" class="status" style="display:none;">Đã bật Full</div>
-    </div>
-
-    <div id="marqueeContainer">
-        <div id="marqueeText">Hack by LongV | TikTok: @bolongnguyn598 | Nhẹ Tâm Bám Đầu Offset: 1016018816 → 16018816 | Fix rung - Bám đầu mượt - No dame error - 100% Head</div>
-    </div>
-
-    <script type="text/javascript">
-        // Hàm search & replace chung (tối ưu, tránh lặp)
-        function searchAndReplace(searchVal, replaceVal, type = 'I32') {
-            h5gg.clearResults();
-            h5gg.searchNumber(searchVal, type, '0x100000000', '0x160000000');
-            let count = h5gg.getResultsCount();
-            if (count > 0) {
-                let results = h5gg.getResults(count);
-                for (let i = 0; i < count; i++) {
-                    h5gg.setValue(results[i].address, replaceVal, type);
-                }
-            }
-        }
-
-        // Danthang (giữ nguyên)
-        function danthang() {
-            searchAndReplace('1016018816', '200', 'I32');
-            document.getElementById("statusDanthang").style.display = "block";
-        }
-
-        // Buffman (giữ nguyên, code sạch hơn)
-        function buffman1() {
-            h5gg.clearResults();
-            let hk1 = 2000;
-            h5gg.searchNumber('4417130516484980736', 'I64', '0x100000000', '0x160000000');
-            let count = h5gg.getResultsCount();
-            if (count > 0) {
-                let r = h5gg.getResults(count);
-                for (let i = 0; i < count; i++) {
-                    let addr = Number(r[i].address);
-                    h5gg.setValue(addr - 4, hk1, "F32");
-                    h5gg.setValue(addr - 8, hk1, "F32");
-                    h5gg.setValue(addr - 12, hk1, "F32");
-                    h5gg.setValue(addr, hk1, "F32");
-                }
-            }
-            document.getElementById("statusBuffman").style.display = "block";
-        }
-
-        // Nhẹ Tâm Bám Đầu (smooth head lock, fix rung, bám đầu tự nhiên)
-        function nheTamBamDau() {
-            searchAndReplace('1016018816', '16018816', 'I32');
-            document.getElementById("statusNheTam").style.display = "block";
-        }
-
-        // All-in-one: bật hết + auto refresh 10s để giữ nhẹ tâm ổn định
-        let autoInterval;
-        function runAllInOne() {
-            danthang();
-            buffman1();
-            nheTamBamDau();
-            document.getElementById("statusAll").style.display = "block";
-
-            if (autoInterval) clearInterval(autoInterval);
-            autoInterval = setInterval(() => {
-                danthang();
-                buffman1();
-                nheTamBamDau();  // Re-apply để chống reset, giữ bám đầu mượt
-            }, 10000);
-        }
-
-        window.addEventListener("beforeunload", () => {
-            if (autoInterval) clearInterval(autoInterval);
-        });
-    </script>
 </body>
 </html>
